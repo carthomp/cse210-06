@@ -1,5 +1,7 @@
 # Space Invaders
+
 ## Design Priority
+
 ```
 (2) Main Scene
 ·        (2) Play button
@@ -23,7 +25,9 @@
 ·        (2) Restart button
 ·        (3) Sad face animation
 ```
+
 ## Class Design
+
 ```
 Directing:
 -       Director
@@ -49,3 +53,59 @@ Services:
 Other:
 -       Point
 -       Color
+
+
+
+
+Casting:
+-       actor
+-       animation
+-       bullet
+-       body
+-       alien-spacheship
+-       cast
+-       color
+-       image
+-       label
+-       point
+-       home-spaceship
+-       sound
+-       stats
+-       text
+
+Services
+  raylib
+  -       audio-service
+  -       keyboard-service
+  -       mouse-service
+  -       physics-service
+  -       video-service
+-       audio-service
+-       keyboard-service
+-       mouse-service
+-       physics-service
+-       video-service
+
+
+Scripting
+-       action-callback
+-       action
+-       change-scene
+-       check-over-action
+-       collide-enemy-ship
+-       shoot bullet
+-       collide enemy and own ship
+-       control  ship
+-       draw bullets
+-       move enemy ship
+-       draw dialog action
+-       draw hud action
+-       draw my ship action
+-       end drawing action
+-       initialize devices
+-       load assets action
+-       move bullet action
+-       move my ship action
+-       move enemy ship action
+-       play sound action
+```
