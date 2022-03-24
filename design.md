@@ -62,13 +62,13 @@ Casting:
 -       animation
 -       bullet
 -       body
--       alien-spacheship
+-       alien
 -       cast
 -       color
 -       image
 -       label
 -       point
--       home-spaceship
+-       my spaceship
 -       sound
 -       stats
 -       text
@@ -92,12 +92,12 @@ Scripting
 -       action
 -       change-scene
 -       check-over-action
--       collide-enemy-ship
+-       collide alien
 -       shoot bullet
--       collide enemy and own ship
+-       collide alien and my spaceship
 -       control  ship
 -       draw bullets
--       move enemy ship
+-       move alien
 -       draw dialog action
 -       draw hud action
 -       draw my ship action
@@ -105,7 +105,7 @@ Scripting
 -       initialize devices
 -       load assets action
 -       move bullet action
--       move my ship action
--       move enemy ship action
+-       move my spaceship action
+-       move alien action
 -       play sound action
 ```
