@@ -13,19 +13,19 @@ from game.casting.text import Text
 from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
-from game.scripting.collide_brick_action import CollideBrickAction
+from game.scripting.collide_enemy_ship import CollideEnemyShip
 from game.scripting.collide_racket_action import CollideRacketAction
-from game.scripting.control_racket_action import ControlRacketAction
-from game.scripting.draw_ball_action import DrawBallAction
-from game.scripting.draw_bricks_action import DrawBricksAction
+from game.scripting.control_ship import ControlShip
+from game.scripting.draw_bullets import DrawBullets
+from game.scripting.draw_enemy_ship import DrawEnemyShip
 from game.scripting.draw_dialog_action import DrawDialogAction
 from game.scripting.draw_hud_action import DrawHudAction
-from game.scripting.draw_racket_action import DrawRacketAction
+from game.scripting.draw_ship import DrawShip
 from game.scripting.end_drawing_action import EndDrawingAction
 from game.scripting.initialize_devices_action import InitializeDevicesAction
 from game.scripting.load_assets_action import LoadAssetsAction
-from game.scripting.move_ball_action import MoveBallAction
-from game.scripting.move_racket_action import MoveRacketAction
+from game.scripting.move_bullet import MoveBullet
+from game.scripting.move_ship import MoveShip
 from game.scripting.play_sound_action import PlaySoundAction
 from game.scripting.release_devices_action import ReleaseDevicesAction
 from game.scripting.start_drawing_action import StartDrawingAction
@@ -47,19 +47,19 @@ class SceneManager:
 
     CHECK_OVER_ACTION = CheckOverAction()
     COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
-    COLLIDE_BRICKS_ACTION = CollideBrickAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_ENEMY_SHIP = CollideEnemyShip(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
-    CONTROL_RACKET_ACTION = ControlRacketAction(KEYBOARD_SERVICE)
-    DRAW_BALL_ACTION = DrawBallAction(VIDEO_SERVICE)
-    DRAW_BRICKS_ACTION = DrawBricksAction(VIDEO_SERVICE)
+    CONTROL_SHIP = ControlShip(KEYBOARD_SERVICE)
+    DRAW_BULLETS = DrawBullets(VIDEO_SERVICE)
+    DRAW_ENEMY_SHIP = DrawEnemyShip(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
-    DRAW_RACKET_ACTION= DrawRacketAction(VIDEO_SERVICE)
+    DRAW_SHIP= DrawShip(VIDEO_SERVICE)
     END_DRAWING_ACTION = EndDrawingAction(VIDEO_SERVICE)
     INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
-    MOVE_BALL_ACTION = MoveBallAction()
-    MOVE_RACKET_ACTION = MoveRacketAction()
+    MOVE_BULLET = MoveBullet()
+    MOVE_SHIP = MoveShip()
     RELEASE_DEVICES_ACTION = ReleaseDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
     START_DRAWING_ACTION = StartDrawingAction(VIDEO_SERVICE)
     UNLOAD_ASSETS_ACTION = UnloadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
@@ -254,9 +254,9 @@ class SceneManager:
         script.clear_actions(OUTPUT)
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
         script.add_action(OUTPUT, self.DRAW_HUD_ACTION)
-        script.add_action(OUTPUT, self.DRAW_BALL_ACTION)
-        script.add_action(OUTPUT, self.DRAW_BRICKS_ACTION)
-        script.add_action(OUTPUT, self.DRAW_RACKET_ACTION)
+        script.add_action(OUTPUT, self.DRAW_BULLETS)
+        script.add_action(OUTPUT, self.DRAW_ENEMY_SHIP)
+        script.add_action(OUTPUT, self.DRAW_SHIP)
         script.add_action(OUTPUT, self.DRAW_DIALOG_ACTION)
         script.add_action(OUTPUT, self.END_DRAWING_ACTION)
 
@@ -270,10 +270,10 @@ class SceneManager:
         
     def _add_update_script(self, script):
         script.clear_actions(UPDATE)
-        script.add_action(UPDATE, self.MOVE_BALL_ACTION)
-        script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+        script.add_action(UPDATE, self.MOVE_BULLET)
+        script.add_action(UPDATE, self.MOVE_SHIP)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
-        script.add_action(UPDATE, self.COLLIDE_BRICKS_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_ENEMY_SHIP)
         script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION)
-        script.add_action(UPDATE, self.MOVE_RACKET_ACTION)
+        script.add_action(UPDATE, self.MOVE_SHIP)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)
