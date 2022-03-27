@@ -1,7 +1,7 @@
 from constants import *
 from game.scripting.action import Action
 
-
+# Formerly DrawBricksAction
 class DrawBricksAction(Action):
 
     def __init__(self, video_service):

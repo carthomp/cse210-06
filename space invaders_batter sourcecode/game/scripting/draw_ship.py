@@ -1,8 +1,8 @@
 from constants import *
 from game.scripting.action import Action
 
-
-class DrawRacketAction(Action):
+# Formerly DrawRacketAction
+class DrawShip(Action):
 
     def __init__(self, video_service):
         self._video_service = video_service

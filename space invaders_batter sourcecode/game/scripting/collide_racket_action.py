@@ -2,7 +2,7 @@ from constants import *
 from game.casting.sound import Sound
 from game.scripting.action import Action
 
-
+# We probably do not need this anymore.
 class CollideRacketAction(Action):
 
     def __init__(self, physics_service, audio_service):

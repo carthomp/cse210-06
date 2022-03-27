@@ -1,8 +1,8 @@
 from constants import *
 from game.scripting.action import Action
 
-
-class MoveBallAction(Action):
+# Formerly MoveBallAction
+class MoveBullet(Action):
 
     def __init__(self):
         pass
