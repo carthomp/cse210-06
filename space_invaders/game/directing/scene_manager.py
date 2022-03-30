@@ -180,26 +180,28 @@ class SceneManager:
 
             for r, row in enumerate(reader):
                 for c, column in enumerate(row):
+                    if column[0] == 'x':
+                        pass
+                    else:
+                        x = FIELD_LEFT + c * ENEMY_WIDTH
+                        y = FIELD_TOP + r * ENEMY_HEIGHT
+                        color = column[0]
+                        frames = int(column[1])
+                        points = ENEMY_POINTS
 
-                    x = FIELD_LEFT + c * ENEMY_WIDTH
-                    y = FIELD_TOP + r * ENEMY_HEIGHT
-                    color = column[0]
-                    frames = int(column[1])
-                    points = ENEMY_POINTS
+                        if frames == 1:
+                            points *= 2
 
-                    if frames == 1:
-                        points *= 2
+                        position = Point(x, y)
+                        size = Point(ENEMY_WIDTH, ENEMY_HEIGHT)
+                        velocity = Point(0, 0)
+                        images = ENEMY_IMAGES[color][0:frames]
 
-                    position = Point(x, y)
-                    size = Point(ENEMY_WIDTH, ENEMY_HEIGHT)
-                    velocity = Point(0, 0)
-                    images = ENEMY_IMAGES[color][0:frames]
+                        body = Body(position, size, velocity)
+                        animation = Animation(images, ENEMY_RATE, ENEMY_DELAY)
 
-                    body = Body(position, size, velocity)
-                    animation = Animation(images, ENEMY_RATE, ENEMY_DELAY)
-
-                    enemy = Enemy(body, animation, points)
-                    cast.add_actor(ENEMY_GROUP, enemy)
+                        enemy = Enemy(body, animation, points)
+                        cast.add_actor(ENEMY_GROUP, enemy)
 
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)

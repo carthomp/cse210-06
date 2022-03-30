@@ -4,7 +4,6 @@ from game.scripting.action import Action
 
 # Formerly MoveRacketAction
 
-
 class MoveShip(Action):
 
     def __init__(self):
