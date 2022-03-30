@@ -8,16 +8,16 @@ class DrawEnemyShip(Action):
         self._video_service = video_service
         
     def execute(self, cast, script, callback):
-        bricks = cast.get_actors(BRICK_GROUP)
+        enemies = cast.get_actors(ENEMY_GROUP)
         
-        for brick in bricks:
-            body = brick.get_body()
+        for enemy in enemies:
+            body = enemy.get_body()
 
-            if brick.is_debug():
+            if enemy.is_debug():
                 rectangle = body.get_rectangle()
                 self._video_service.draw_rectangle(rectangle, PURPLE)
                 
-            animation = brick.get_animation()
+            animation = enemy.get_animation()
             image = animation.next_image()
             position = body.get_position()
             self._video_service.draw_image(image, position)

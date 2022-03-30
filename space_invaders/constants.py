@@ -97,28 +97,28 @@ BULLET_WIDTH = 28
 BULLET_HEIGHT = 28
 BULLET_VELOCITY = 20
 
-# RACKET
-RACKET_GROUP = "rackets"
-RACKET_IMAGES = [
+# Ship
+SHIP_GROUP = "ships"
+SHIP_IMAGES = [
     f"space_invaders/assets/images/{n:03}.png" for n in range(100, 103)]
-RACKET_WIDTH = 106
-RACKET_HEIGHT = 28
-RACKET_RATE = 6
-RACKET_VELOCITY = 7
+SHIP_WIDTH = 106
+SHIP_HEIGHT = 28
+SHIP_RATE = 6
+SHIP_VELOCITY = 7
 
-# BRICK
-BRICK_GROUP = "bricks"
-BRICK_IMAGES = {
+# ENEMY
+ENEMY_GROUP = "bricks"
+ENEMY_IMAGES = {
     "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(10, 19)],
     "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
     "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(30, 39)],
     "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(40, 49)]
 }
-BRICK_WIDTH = 80
-BRICK_HEIGHT = 28
-BRICK_DELAY = 0.5
-BRICK_RATE = 4
-BRICK_POINTS = 50
+ENEMY_WIDTH = 80
+ENEMY_HEIGHT = 28
+ENEMY_DELAY = 0.5
+ENEMY_RATE = 4
+ENEMY_POINTS = 50
 
 # DIALOG
 DIALOG_GROUP = "dialogs"

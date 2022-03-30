@@ -16,7 +16,7 @@ from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
 from game.scripting.collide_enemy_ship import CollideEnemyShip
-from game.scripting.collide_racket_action import CollideRacketAction
+from game.scripting.collide_ship_action import CollideShipAction
 from game.scripting.control_ship import ControlShip
 from game.scripting.draw_bullets import DrawBullets
 from game.scripting.draw_enemy_ship import DrawEnemyShip
@@ -52,7 +52,7 @@ class SceneManager:
     COLLIDE_BORDERS_ACTION = CollideBordersAction(
         PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ENEMY_SHIP = CollideEnemyShip(PHYSICS_SERVICE, AUDIO_SERVICE)
-    COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_SHIP_ACTION = CollideShipAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_SHIP = ControlShip(KEYBOARD_SERVICE)
     DRAW_BULLETS = DrawBullets(VIDEO_SERVICE)
     DRAW_ENEMY_SHIP = DrawEnemyShip(VIDEO_SERVICE)
@@ -94,8 +94,8 @@ class SceneManager:
         self._add_lives(cast)
         self._add_score(cast)
         self._add_bullet(cast)
-        self._add_bricks(cast)
-        self._add_racket(cast)
+        self._add_enemies(cast)
+        self._add_ship(cast)
         self._add_dialog(cast, ENTER_TO_START)
 
         self._add_initialize_script(script)
@@ -109,8 +109,8 @@ class SceneManager:
 
     def _prepare_next_level(self, cast, script):
         self._add_bullet(cast)
-        self._add_bricks(cast)
-        self._add_racket(cast)
+        self._add_enemies(cast)
+        self._add_ship(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
 
         script.clear_actions(INPUT)
@@ -121,7 +121,7 @@ class SceneManager:
 
     def _prepare_try_again(self, cast, script):
         self._add_bullet(cast)
-        self._add_racket(cast)
+        self._add_ship(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
 
         script.clear_actions(INPUT)
@@ -140,7 +140,7 @@ class SceneManager:
 
     def _prepare_game_over(self, cast, script):
         self._add_bullet(cast)
-        self._add_racket(cast)
+        self._add_ship(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
 
         script.clear_actions(INPUT)
@@ -159,7 +159,7 @@ class SceneManager:
     def _add_bullet(self, cast):
         cast.clear_actors(BULLET_GROUP)
         x = CENTER_X - BULLET_WIDTH / 2
-        y = SCREEN_HEIGHT - RACKET_HEIGHT - BULLET_HEIGHT  
+        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = Point(0, 0)
@@ -168,8 +168,8 @@ class SceneManager:
         bullet = Bullet(body, image, True)
         cast.add_actor(BULLET_GROUP, bullet)
 
-    def _add_bricks(self, cast):
-        cast.clear_actors(BRICK_GROUP)
+    def _add_enemies(self, cast):
+        cast.clear_actors(ENEMY_GROUP)
 
         stats = cast.get_first_actor(STATS_GROUP)
         level = stats.get_level() % BASE_LEVELS
@@ -181,25 +181,25 @@ class SceneManager:
             for r, row in enumerate(reader):
                 for c, column in enumerate(row):
 
-                    x = FIELD_LEFT + c * BRICK_WIDTH
-                    y = FIELD_TOP + r * BRICK_HEIGHT
+                    x = FIELD_LEFT + c * ENEMY_WIDTH
+                    y = FIELD_TOP + r * ENEMY_HEIGHT
                     color = column[0]
                     frames = int(column[1])
-                    points = BRICK_POINTS
+                    points = ENEMY_POINTS
 
                     if frames == 1:
                         points *= 2
 
                     position = Point(x, y)
-                    size = Point(BRICK_WIDTH, BRICK_HEIGHT)
+                    size = Point(ENEMY_WIDTH, ENEMY_HEIGHT)
                     velocity = Point(0, 0)
-                    images = BRICK_IMAGES[color][0:frames]
+                    images = ENEMY_IMAGES[color][0:frames]
 
                     body = Body(position, size, velocity)
-                    animation = Animation(images, BRICK_RATE, BRICK_DELAY)
+                    animation = Animation(images, ENEMY_RATE, ENEMY_DELAY)
 
                     enemy = Enemy(body, animation, points)
-                    cast.add_actor(BRICK_GROUP, enemy)
+                    cast.add_actor(ENEMY_GROUP, enemy)
 
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
@@ -234,17 +234,17 @@ class SceneManager:
         stats = Stats()
         cast.add_actor(STATS_GROUP, stats)
 
-    def _add_racket(self, cast):
-        cast.clear_actors(RACKET_GROUP)
-        x = CENTER_X - RACKET_WIDTH / 2
-        y = SCREEN_HEIGHT - RACKET_HEIGHT
+    def _add_ship(self, cast):
+        cast.clear_actors(SHIP_GROUP)
+        x = CENTER_X - SHIP_WIDTH / 2
+        y = SCREEN_HEIGHT - SHIP_HEIGHT
         position = Point(x, y)
-        size = Point(RACKET_WIDTH, RACKET_HEIGHT)
+        size = Point(SHIP_WIDTH, SHIP_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        animation = Animation(RACKET_IMAGES, RACKET_RATE)
+        animation = Animation(SHIP_IMAGES, SHIP_RATE)
         ship = Ship(body, animation)
-        cast.add_actor(RACKET_GROUP, ship)
+        cast.add_actor(SHIP_GROUP, ship)
 
     # ----------------------------------------------------------------------------------------------
     # scripting methods
@@ -281,6 +281,6 @@ class SceneManager:
         script.add_action(UPDATE, self.MOVE_SHIP)
         script.add_action(UPDATE, self.COLLIDE_BORDERS_ACTION)
         script.add_action(UPDATE, self.COLLIDE_ENEMY_SHIP)
-        script.add_action(UPDATE, self.COLLIDE_RACKET_ACTION)
+        script.add_action(UPDATE, self.COLLIDE_SHIP_ACTION)
         script.add_action(UPDATE, self.MOVE_SHIP)
         script.add_action(UPDATE, self.CHECK_OVER_ACTION)

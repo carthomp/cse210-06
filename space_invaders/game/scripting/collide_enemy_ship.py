@@ -16,11 +16,11 @@ class CollideEnemyShip(Action):
         self._audio_service = audio_service
     
     def remake_bullet(self, cast):
-        ship = cast.get_first_actor(RACKET_GROUP)
+        ship = cast.get_first_actor(SHIP_GROUP)
         ship_body = ship.get_body()
         ship_position = ship_body.get_position()
         x = ship_position.get_x()
-        y = SCREEN_HEIGHT - RACKET_HEIGHT - BULLET_HEIGHT  
+        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = Point(0, 0)
@@ -31,19 +31,19 @@ class CollideEnemyShip(Action):
 
     def execute(self, cast, script, callback):
         ball = cast.get_first_actor(BULLET_GROUP)
-        bricks = cast.get_actors(BRICK_GROUP)
+        enemies = cast.get_actors(ENEMY_GROUP)
         stats = cast.get_first_actor(STATS_GROUP)
 
-        for brick in bricks:
+        for enemy in enemies:
             ball_body = ball.get_body()
-            brick_body = brick.get_body()
+            enemy_body = enemy.get_body()
 
-            if self._physics_service.has_collided(ball_body, brick_body):
+            if self._physics_service.has_collided(ball_body, enemy_body):
                 sound = Sound(BOUNCE_SOUND)
                 self._audio_service.play_sound(sound)
-                points = brick.get_points()
+                points = enemy.get_points()
                 stats.add_points(points)
-                cast.remove_actor(BRICK_GROUP, brick)
+                cast.remove_actor(ENEMY_GROUP, enemy)
                 self.remake_bullet(cast)
                 cast.remove_actor(BULLET_GROUP, ball)
                 
