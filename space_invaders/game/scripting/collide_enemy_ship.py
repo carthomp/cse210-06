@@ -23,7 +23,7 @@ class CollideEnemyShip(Action):
         y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
-        velocity = Point(0, 0)
+        velocity = ship_body.get_velocity()
         body = Body(position, size, velocity)
         image = Image(BULLET_IMAGE)
         bullet = Bullet(body, image, True)

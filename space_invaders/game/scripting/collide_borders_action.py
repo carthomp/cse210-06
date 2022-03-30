@@ -52,8 +52,9 @@ class CollideBordersAction(Action):
         y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
-        velocity = Point(0, 0)
+        velocity = ship_body.get_velocity()
         body = Body(position, size, velocity)
+        body.set_position(position)
         image = Image(BULLET_IMAGE)
         bullet = Bullet(body, image, True)
         cast.add_actor(BULLET_GROUP, bullet)

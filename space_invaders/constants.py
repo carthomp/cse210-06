@@ -93,26 +93,26 @@ SCORE_FORMAT = "SCORE: {}"
 # BULLET
 BULLET_GROUP = "balls"
 BULLET_IMAGE = "space_invaders/assets/images/000.png"
-BULLET_WIDTH = 28
-BULLET_HEIGHT = 28
+BULLET_WIDTH = 20
+BULLET_HEIGHT = 20
 BULLET_VELOCITY = 20
 
 # Ship
 SHIP_GROUP = "ships"
 SHIP_IMAGES = [
     f"space_invaders/assets/images/{n:03}.png" for n in range(100, 103)]
-SHIP_WIDTH = 106
-SHIP_HEIGHT = 106
+SHIP_WIDTH = 90
+SHIP_HEIGHT = 100
 SHIP_RATE = 6
 SHIP_VELOCITY = 7
 
 # ENEMY
 ENEMY_GROUP = "bricks"
 ENEMY_IMAGES = {
-    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(10, 19)],
+    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
     "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
-    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(30, 39)],
-    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(40, 49)]
+    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
+    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)]
 }
 ENEMY_WIDTH = 80
 ENEMY_HEIGHT = 28
