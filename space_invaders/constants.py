@@ -1,9 +1,9 @@
 import pathlib
 from game.casting.color import Color
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # GENERAL GAME CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # GAME
 GAME_NAME = "Space Invaders"
@@ -37,7 +37,7 @@ ALIGN_LEFT = 1
 ALIGN_RIGHT = 2
 
 # COLORS
-BLACK = Color(0, 0, 0)
+BLACK = Color(0, 255, 0)
 WHITE = Color(255, 255, 255)
 PURPLE = Color(255, 0, 255)
 
@@ -59,9 +59,9 @@ GAME_OVER = 4
 LEVEL_FILE = "space_invaders/assets/data/level-{:03}.txt"
 BASE_LEVELS = 5
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # SCRIPTING CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # PHASES
 INITIALIZE = 0
@@ -72,9 +72,9 @@ OUTPUT = 4
 UNLOAD = 5
 RELEASE = 6
 
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 # CASTING CONSTANTS
-# -------------------------------------------------------------------------------------------------- 
+# --------------------------------------------------------------------------------------------------
 
 # STATS
 STATS_GROUP = "stats"
@@ -99,7 +99,8 @@ BULLET_VELOCITY = 6
 
 # RACKET
 RACKET_GROUP = "rackets"
-RACKET_IMAGES = [f"space_invaders/assets/images/{n:03}.png" for n in range(100, 103)]
+RACKET_IMAGES = [
+    f"space_invaders/assets/images/{n:03}.png" for n in range(100, 103)]
 RACKET_WIDTH = 106
 RACKET_HEIGHT = 28
 RACKET_RATE = 6
@@ -108,10 +109,10 @@ RACKET_VELOCITY = 7
 # BRICK
 BRICK_GROUP = "bricks"
 BRICK_IMAGES = {
-    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(10,19)],
-    "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(20,29)],
-    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(30,39)],
-    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(40,49)]
+    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(10, 19)],
+    "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
+    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(30, 39)],
+    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(40, 49)]
 }
 BRICK_WIDTH = 80
 BRICK_HEIGHT = 28
