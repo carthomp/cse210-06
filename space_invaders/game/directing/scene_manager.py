@@ -1,5 +1,6 @@
 import csv
 from constants import *
+
 from game.casting.animation import Animation
 from game.casting.bullet import Bullet
 from game.casting.body import Body
@@ -9,7 +10,8 @@ from game.casting.label import Label
 from game.casting.point import Point
 from game.casting.ship import Ship
 from game.casting.stats import Stats
-from game.casting.text import Text 
+from game.casting.text import Text
+
 from game.scripting.change_scene_action import ChangeSceneAction
 from game.scripting.check_over_action import CheckOverAction
 from game.scripting.collide_borders_action import CollideBordersAction
@@ -31,6 +33,7 @@ from game.scripting.release_devices_action import ReleaseDevicesAction
 from game.scripting.start_drawing_action import StartDrawingAction
 from game.scripting.timed_change_scene_action import TimedChangeSceneAction
 from game.scripting.unload_assets_action import UnloadAssetsAction
+
 from game.services.raylib.raylib_audio_service import RaylibAudioService
 from game.services.raylib.raylib_keyboard_service import RaylibKeyboardService
 from game.services.raylib.raylib_physics_service import RaylibPhysicsService
@@ -39,14 +42,15 @@ from game.services.raylib.raylib_video_service import RaylibVideoService
 
 class SceneManager:
     """The person in charge of setting up the cast and script for each scene."""
-    
+
     AUDIO_SERVICE = RaylibAudioService()
     KEYBOARD_SERVICE = RaylibKeyboardService()
     PHYSICS_SERVICE = RaylibPhysicsService()
     VIDEO_SERVICE = RaylibVideoService(GAME_NAME, SCREEN_WIDTH, SCREEN_HEIGHT)
 
     CHECK_OVER_ACTION = CheckOverAction()
-    COLLIDE_BORDERS_ACTION = CollideBordersAction(PHYSICS_SERVICE, AUDIO_SERVICE)
+    COLLIDE_BORDERS_ACTION = CollideBordersAction(
+        PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_ENEMY_SHIP = CollideEnemyShip(PHYSICS_SERVICE, AUDIO_SERVICE)
     COLLIDE_RACKET_ACTION = CollideRacketAction(PHYSICS_SERVICE, AUDIO_SERVICE)
     CONTROL_SHIP = ControlShip(KEYBOARD_SERVICE)
@@ -54,9 +58,10 @@ class SceneManager:
     DRAW_ENEMY_SHIP = DrawEnemyShip(VIDEO_SERVICE)
     DRAW_DIALOG_ACTION = DrawDialogAction(VIDEO_SERVICE)
     DRAW_HUD_ACTION = DrawHudAction(VIDEO_SERVICE)
-    DRAW_SHIP= DrawShip(VIDEO_SERVICE)
+    DRAW_SHIP = DrawShip(VIDEO_SERVICE)
     END_DRAWING_ACTION = EndDrawingAction(VIDEO_SERVICE)
-    INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(AUDIO_SERVICE, VIDEO_SERVICE)
+    INITIALIZE_DEVICES_ACTION = InitializeDevicesAction(
+        AUDIO_SERVICE, VIDEO_SERVICE)
     LOAD_ASSETS_ACTION = LoadAssetsAction(AUDIO_SERVICE, VIDEO_SERVICE)
     MOVE_BULLET = MoveBullet()
     MOVE_SHIP = MoveShip()
@@ -76,13 +81,13 @@ class SceneManager:
             self._prepare_try_again(cast, script)
         elif scene == IN_PLAY:
             self._prepare_in_play(cast, script)
-        elif scene == GAME_OVER:    
+        elif scene == GAME_OVER:
             self._prepare_game_over(cast, script)
-    
+
     # ----------------------------------------------------------------------------------------------
     # scene methods
     # ----------------------------------------------------------------------------------------------
-    
+
     def _prepare_new_game(self, cast, script):
         self._add_stats(cast)
         self._add_level(cast)
@@ -96,11 +101,12 @@ class SceneManager:
         self._add_initialize_script(script)
         self._add_load_script(script)
         script.clear_actions(INPUT)
-        script.add_action(INPUT, ChangeSceneAction(self.KEYBOARD_SERVICE, NEXT_LEVEL))
+        script.add_action(INPUT, ChangeSceneAction(
+            self.KEYBOARD_SERVICE, NEXT_LEVEL))
         self._add_output_script(script)
         self._add_unload_script(script)
         self._add_release_script(script)
-        
+
     def _prepare_next_level(self, cast, script):
         self._add_bullet(cast)
         self._add_bricks(cast)
@@ -110,8 +116,9 @@ class SceneManager:
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
         self._add_output_script(script)
-        script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
-        
+        script.add_action(OUTPUT, PlaySoundAction(
+            self.AUDIO_SERVICE, WELCOME_SOUND))
+
     def _prepare_try_again(self, cast, script):
         self._add_bullet(cast)
         self._add_racket(cast)
@@ -163,7 +170,7 @@ class SceneManager:
 
     def _add_bricks(self, cast):
         cast.clear_actors(BRICK_GROUP)
-        
+
         stats = cast.get_first_actor(STATS_GROUP)
         level = stats.get_level() % BASE_LEVELS
         filename = LEVEL_FILE.format(level)
@@ -178,11 +185,11 @@ class SceneManager:
                     y = FIELD_TOP + r * BRICK_HEIGHT
                     color = column[0]
                     frames = int(column[1])
-                    points = BRICK_POINTS 
-                    
+                    points = BRICK_POINTS
+
                     if frames == 1:
                         points *= 2
-                    
+
                     position = Point(x, y)
                     size = Point(BRICK_WIDTH, BRICK_HEIGHT)
                     velocity = Point(0, 0)
@@ -249,7 +256,7 @@ class SceneManager:
     def _add_load_script(self, script):
         script.clear_actions(LOAD)
         script.add_action(LOAD, self.LOAD_ASSETS_ACTION)
-    
+
     def _add_output_script(self, script):
         script.clear_actions(OUTPUT)
         script.add_action(OUTPUT, self.START_DRAWING_ACTION)
@@ -263,11 +270,11 @@ class SceneManager:
     def _add_release_script(self, script):
         script.clear_actions(RELEASE)
         script.add_action(RELEASE, self.RELEASE_DEVICES_ACTION)
-    
+
     def _add_unload_script(self, script):
         script.clear_actions(UNLOAD)
         script.add_action(UNLOAD, self.UNLOAD_ASSETS_ACTION)
-        
+
     def _add_update_script(self, script):
         script.clear_actions(UPDATE)
         script.add_action(UPDATE, self.MOVE_BULLET)
