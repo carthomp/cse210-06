@@ -1,4 +1,6 @@
 from game.casting.actor import Actor
+from game.casting.point import Point
+from constants import ENEMY_HEIGHT, ENEMY_WIDTH
 
 
 class Enemy(Actor):
@@ -16,6 +18,7 @@ class Enemy(Actor):
         self._body = body
         self._animation = animation
         self._points = points
+        self._move_counter = 0
 
     def get_animation(self):
         """Gets the brick's image.
@@ -40,3 +43,28 @@ class Enemy(Actor):
             A number representing the brick's points.
         """
         return self._points
+    
+    def move_self(self):
+        body = self._body
+        if self._move_counter % 50 == 0:
+            if (self._move_counter / 50) % 6 == 0:
+                velocity = Point(ENEMY_WIDTH, 0)
+            elif (self._move_counter / 50) % 6 == 1:
+                velocity = Point(0, ENEMY_HEIGHT)
+            elif (self._move_counter / 50) % 6 == 2:
+                velocity = Point(-ENEMY_WIDTH, 0)
+            elif (self._move_counter / 50) % 6 == 3:
+                velocity = Point(-ENEMY_WIDTH, 0)
+            elif (self._move_counter / 50) % 6 == 4:
+                velocity = Point(0, ENEMY_HEIGHT)
+            elif (self._move_counter / 50) % 6 == 5:
+                velocity = Point(ENEMY_WIDTH, 0)
+            else:
+                velocity = Point(0,0)
+            body.set_velocity(velocity)
+        else:
+            velocity = Point(0,0)
+            body.set_velocity(velocity)
+        self._move_counter += 1
+    
+
