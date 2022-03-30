@@ -95,7 +95,7 @@ BULLET_GROUP = "balls"
 BULLET_IMAGE = "space_invaders/assets/images/000.png"
 BULLET_WIDTH = 28
 BULLET_HEIGHT = 28
-BULLET_VELOCITY = 6
+BULLET_VELOCITY = 20
 
 # RACKET
 RACKET_GROUP = "rackets"
