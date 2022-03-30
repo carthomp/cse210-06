@@ -151,7 +151,7 @@ class SceneManager:
     # ----------------------------------------------------------------------------------------------
     # casting methods
     # ----------------------------------------------------------------------------------------------
-    
+
     def _activate_bullet(self, cast):
         bullet = cast.get_first_actor(BULLET_GROUP)
         bullet.release()
@@ -159,7 +159,7 @@ class SceneManager:
     def _add_bullet(self, cast):
         cast.clear_actors(BULLET_GROUP)
         x = CENTER_X - BULLET_WIDTH / 2
-        y = SCREEN_HEIGHT - RACKET_HEIGHT - BULLET_HEIGHT  
+        y = SCREEN_HEIGHT - RACKET_HEIGHT - BULLET_HEIGHT
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = Point(0, 0)
