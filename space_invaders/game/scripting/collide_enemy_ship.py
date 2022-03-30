@@ -14,7 +14,7 @@ class CollideEnemyShip(Action):
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
         self._audio_service = audio_service
-    
+
     def remake_bullet(self, cast):
         ship = cast.get_first_actor(SHIP_GROUP)
         ship_body = ship.get_body()
@@ -30,6 +30,7 @@ class CollideEnemyShip(Action):
         cast.add_actor(BULLET_GROUP, bullet)
 
     def execute(self, cast, script, callback):
+<<<<<<< HEAD
         ball = cast.get_first_actor(BULLET_GROUP)
         enemies = cast.get_actors(ENEMY_GROUP)
         stats = cast.get_first_actor(STATS_GROUP)
@@ -39,11 +40,25 @@ class CollideEnemyShip(Action):
             enemy_body = enemy.get_body()
 
             if self._physics_service.has_collided(ball_body, enemy_body):
+=======
+        bullet = cast.get_first_actor(BULLET_GROUP)
+        bricks = cast.get_actors(BRICK_GROUP)
+        stats = cast.get_first_actor(STATS_GROUP)
+
+        for brick in bricks:
+            bullet_body = bullet.get_body()
+            brick_body = brick.get_body()
+
+            if self._physics_service.has_collided(bullet_body, brick_body):
+>>>>>>> 762512f0d0f73966597b28f7d56d88bfffb006a4
                 sound = Sound(BOUNCE_SOUND)
                 self._audio_service.play_sound(sound)
                 points = enemy.get_points()
                 stats.add_points(points)
+<<<<<<< HEAD
                 cast.remove_actor(ENEMY_GROUP, enemy)
+=======
+                cast.remove_actor(BRICK_GROUP, brick)
+                cast.remove_actor(BULLET_GROUP, bullet)
+>>>>>>> 762512f0d0f73966597b28f7d56d88bfffb006a4
                 self.remake_bullet(cast)
-                cast.remove_actor(BULLET_GROUP, ball)
-                

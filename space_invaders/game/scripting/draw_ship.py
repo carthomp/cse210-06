@@ -2,11 +2,13 @@ from constants import *
 from game.scripting.action import Action
 
 # Formerly DrawRacketAction
+
+
 class DrawShip(Action):
 
     def __init__(self, video_service):
         self._video_service = video_service
-        
+
     def execute(self, cast, script, callback):
         ship = cast.get_first_actor(SHIP_GROUP)
         body = ship.get_body()

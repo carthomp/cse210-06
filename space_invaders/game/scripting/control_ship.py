@@ -2,11 +2,13 @@ from constants import *
 from game.scripting.action import Action
 
 # Formerly ControlRacketAction
+
+
 class ControlShip(Action):
 
     def __init__(self, keyboard_service):
         self._keyboard_service = keyboard_service
-        
+
     def execute(self, cast, script, callback):
         ship = cast.get_first_actor(SHIP_GROUP)
         if self._keyboard_service.is_key_down(LEFT): 

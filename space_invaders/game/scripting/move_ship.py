@@ -3,6 +3,8 @@ from game.casting.point import Point
 from game.scripting.action import Action
 
 # Formerly MoveRacketAction
+
+
 class MoveShip(Action):
 
     def __init__(self):
@@ -14,7 +16,7 @@ class MoveShip(Action):
         velocity = body.get_velocity()
         position = body.get_position()
         x = position.get_x()
-        
+
         position = position.add(velocity)
 
         if x < 0:
@@ -23,4 +25,3 @@ class MoveShip(Action):
             position = Point(SCREEN_WIDTH - SHIP_WIDTH, position.get_y())
             
         body.set_position(position)
-        

@@ -6,7 +6,7 @@ class CheckOverAction(Action):
 
     def __init__(self):
         pass
-        
+
     def execute(self, cast, script, callback):
         enemies = cast.get_actors(ENEMY_GROUP)
         if len(enemies) == 0:

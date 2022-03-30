@@ -151,7 +151,7 @@ class SceneManager:
     # ----------------------------------------------------------------------------------------------
     # casting methods
     # ----------------------------------------------------------------------------------------------
-    
+
     def _activate_bullet(self, cast):
         bullet = cast.get_first_actor(BULLET_GROUP)
         bullet.release()

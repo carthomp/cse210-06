@@ -53,7 +53,7 @@ class VideoService:
 
     def is_window_open(self):
         """Wether or not the window is open.
-        
+
         Returns:
             True if the window is open; false if otherwise.
         """
@@ -61,7 +61,7 @@ class VideoService:
 
     def load_fonts(self, directory):
         """Loads all the fonts in the given directory and sub-directories.
-        
+
         Args:
             directory: A string containing the absolute folder path where font files are stored.
         """
@@ -69,7 +69,7 @@ class VideoService:
 
     def load_images(self, directory):
         """Loads all the images in the given directory and sub-directories.
-        
+
         Args:
             directory: A string containing the absolute folder path where image files are stored.
         """

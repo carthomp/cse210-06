@@ -2,11 +2,13 @@ from constants import *
 from game.scripting.action import Action
 
 # Formerly DrawBricksAction
+
+
 class DrawEnemyShip(Action):
 
     def __init__(self, video_service):
         self._video_service = video_service
-        
+
     def execute(self, cast, script, callback):
         enemies = cast.get_actors(ENEMY_GROUP)
         
