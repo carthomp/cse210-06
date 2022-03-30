@@ -1,6 +1,10 @@
 from constants import *
 from game.casting.sound import Sound
 from game.scripting.action import Action
+from game.casting.point import Point
+from game.casting.body import Body
+from game.casting.bullet import Bullet
+from game.casting.image import Image
 
 
 class CollideBordersAction(Action):
@@ -10,8 +14,8 @@ class CollideBordersAction(Action):
         self._audio_service = audio_service
 
     def execute(self, cast, script, callback):
-        ball = cast.get_first_actor(BULLET_GROUP)
-        body = ball.get_body()
+        bullet = cast.get_first_actor(BULLET_GROUP)
+        body = bullet.get_body()
         position = body.get_position()
         x = position.get_x()
         y = position.get_y()
@@ -19,16 +23,16 @@ class CollideBordersAction(Action):
         over_sound = Sound(OVER_SOUND)
 
         if x < FIELD_LEFT:
-            ball.bounce_x()
-            self._audio_service.play_sound(bounce_sound)
+            position = Point(0, position.get_y())
+            body.set_position(position)
 
         elif x >= (FIELD_RIGHT - BULLET_WIDTH):
-            ball.bounce_x()
-            self._audio_service.play_sound(bounce_sound)
+            position = Point(SCREEN_WIDTH - BULLET_WIDTH, position.get_y())
+            body.set_position(position)
 
         if y < FIELD_TOP:
-            ball.bounce_y()
-            self._audio_service.play_sound(bounce_sound)
+            cast.remove_actor(BULLET_GROUP, bullet)
+            self.remake_bullet(cast)
 
         elif y >= (FIELD_BOTTOM - BULLET_WIDTH):
             stats = cast.get_first_actor(STATS_GROUP)
@@ -39,3 +43,17 @@ class CollideBordersAction(Action):
             else:
                 callback.on_next(GAME_OVER)
                 self._audio_service.play_sound(over_sound)
+    
+    def remake_bullet(self, cast):
+        ship = cast.get_first_actor(SHIP_GROUP)
+        ship_body = ship.get_body()
+        ship_position = ship_body.get_position()
+        x = ship_position.get_x()
+        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
+        position = Point(x, y)
+        size = Point(BULLET_WIDTH, BULLET_HEIGHT)
+        velocity = Point(0, 0)
+        body = Body(position, size, velocity)
+        image = Image(BULLET_IMAGE)
+        bullet = Bullet(body, image, True)
+        cast.add_actor(BULLET_GROUP, bullet)

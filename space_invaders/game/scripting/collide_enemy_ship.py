@@ -44,5 +44,6 @@ class CollideEnemyShip(Action):
                 points = enemy.get_points()
                 stats.add_points(points)
                 cast.remove_actor(ENEMY_GROUP, enemy)
-                cast.remove_actor(BULLET_GROUP, bullet)
+                if cast.get_first_actor(BULLET_GROUP):
+                    cast.remove_actor(BULLET_GROUP, bullet)
                 self.remake_bullet(cast)

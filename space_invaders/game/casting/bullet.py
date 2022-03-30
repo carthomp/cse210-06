@@ -18,6 +18,7 @@ class Bullet(Actor):
         super().__init__(debug)
         self._body = body
         self._image = image
+        self._released = False
 
     def get_body(self):
         """Gets the ball's body.
@@ -41,3 +42,25 @@ class Bullet(Actor):
         vy = -BULLET_VELOCITY
         velocity = Point(vx, vy)
         self._body.set_velocity(velocity)
+        self._released =  True
+    
+    def is_released(self):
+        return self._released
+    
+    def swing_left(self):
+        """Steers the bat to the left."""
+        if not self._released:
+            velocity = Point(-SHIP_VELOCITY, 0)
+            self._body.set_velocity(velocity)
+
+    def swing_right(self):
+        """Steers the bat to the right."""
+        if not self._released:
+            velocity = Point(SHIP_VELOCITY, 0)
+            self._body.set_velocity(velocity)
+
+    def stop_moving(self):
+        """Stops the bat from moving."""
+        if not self._released:
+            velocity = Point(0, 0)
+            self._body.set_velocity(velocity)

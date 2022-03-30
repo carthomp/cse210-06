@@ -102,7 +102,7 @@ SHIP_GROUP = "ships"
 SHIP_IMAGES = [
     f"space_invaders/assets/images/{n:03}.png" for n in range(100, 103)]
 SHIP_WIDTH = 106
-SHIP_HEIGHT = 28
+SHIP_HEIGHT = 106
 SHIP_RATE = 6
 SHIP_VELOCITY = 7
 
