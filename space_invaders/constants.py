@@ -90,12 +90,12 @@ LEVEL_FORMAT = "LEVEL: {}"
 LIVES_FORMAT = "LIVES: {}"
 SCORE_FORMAT = "SCORE: {}"
 
-# BALL
-BALL_GROUP = "balls"
-BALL_IMAGE = "space_invaders/assets/images/000.png"
-BALL_WIDTH = 28
-BALL_HEIGHT = 28
-BALL_VELOCITY = 6
+# BULLET
+BULLET_GROUP = "balls"
+BULLET_IMAGE = "space_invaders/assets/images/000.png"
+BULLET_WIDTH = 28
+BULLET_HEIGHT = 28
+BULLET_VELOCITY = 6
 
 # RACKET
 RACKET_GROUP = "rackets"

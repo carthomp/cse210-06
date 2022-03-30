@@ -1,13 +1,13 @@
 import csv
 from constants import *
 from game.casting.animation import Animation
-from game.casting.ball import Ball
+from game.casting.bullet import Bullet
 from game.casting.body import Body
-from game.casting.brick import Brick
+from game.casting.enemy import Enemy
 from game.casting.image import Image
 from game.casting.label import Label
 from game.casting.point import Point
-from game.casting.racket import Racket
+from game.casting.ship import Ship
 from game.casting.stats import Stats
 from game.casting.text import Text 
 from game.scripting.change_scene_action import ChangeSceneAction
@@ -88,7 +88,7 @@ class SceneManager:
         self._add_level(cast)
         self._add_lives(cast)
         self._add_score(cast)
-        self._add_ball(cast)
+        self._add_bullet(cast)
         self._add_bricks(cast)
         self._add_racket(cast)
         self._add_dialog(cast, ENTER_TO_START)
@@ -102,7 +102,7 @@ class SceneManager:
         self._add_release_script(script)
         
     def _prepare_next_level(self, cast, script):
-        self._add_ball(cast)
+        self._add_bullet(cast)
         self._add_bricks(cast)
         self._add_racket(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
@@ -113,7 +113,7 @@ class SceneManager:
         script.add_action(OUTPUT, PlaySoundAction(self.AUDIO_SERVICE, WELCOME_SOUND))
         
     def _prepare_try_again(self, cast, script):
-        self._add_ball(cast)
+        self._add_bullet(cast)
         self._add_racket(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
 
@@ -123,7 +123,7 @@ class SceneManager:
         self._add_output_script(script)
 
     def _prepare_in_play(self, cast, script):
-        self._activate_ball(cast)
+        self._activate_bullet(cast)
         cast.clear_actors(DIALOG_GROUP)
 
         script.clear_actions(INPUT)
@@ -132,7 +132,7 @@ class SceneManager:
         self._add_output_script(script)
 
     def _prepare_game_over(self, cast, script):
-        self._add_ball(cast)
+        self._add_bullet(cast)
         self._add_racket(cast)
         self._add_dialog(cast, WAS_GOOD_GAME)
 
@@ -145,21 +145,21 @@ class SceneManager:
     # casting methods
     # ----------------------------------------------------------------------------------------------
     
-    def _activate_ball(self, cast):
-        ball = cast.get_first_actor(BALL_GROUP)
-        ball.release()
+    def _activate_bullet(self, cast):
+        bullet = cast.get_first_actor(BULLET_GROUP)
+        bullet.release()
 
-    def _add_ball(self, cast):
-        cast.clear_actors(BALL_GROUP)
-        x = CENTER_X - BALL_WIDTH / 2
-        y = SCREEN_HEIGHT - RACKET_HEIGHT - BALL_HEIGHT  
+    def _add_bullet(self, cast):
+        cast.clear_actors(BULLET_GROUP)
+        x = CENTER_X - BULLET_WIDTH / 2
+        y = SCREEN_HEIGHT - RACKET_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
-        size = Point(BALL_WIDTH, BALL_HEIGHT)
+        size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
-        image = Image(BALL_IMAGE)
-        ball = Ball(body, image, True)
-        cast.add_actor(BALL_GROUP, ball)
+        image = Image(BULLET_IMAGE)
+        bullet = Bullet(body, image, True)
+        cast.add_actor(BULLET_GROUP, bullet)
 
     def _add_bricks(self, cast):
         cast.clear_actors(BRICK_GROUP)
@@ -191,8 +191,8 @@ class SceneManager:
                     body = Body(position, size, velocity)
                     animation = Animation(images, BRICK_RATE, BRICK_DELAY)
 
-                    brick = Brick(body, animation, points)
-                    cast.add_actor(BRICK_GROUP, brick)
+                    enemy = Enemy(body, animation, points)
+                    cast.add_actor(BRICK_GROUP, enemy)
 
     def _add_dialog(self, cast, message):
         cast.clear_actors(DIALOG_GROUP)
@@ -236,8 +236,8 @@ class SceneManager:
         velocity = Point(0, 0)
         body = Body(position, size, velocity)
         animation = Animation(RACKET_IMAGES, RACKET_RATE)
-        racket = Racket(body, animation)
-        cast.add_actor(RACKET_GROUP, racket)
+        ship = Ship(body, animation)
+        cast.add_actor(RACKET_GROUP, ship)
 
     # ----------------------------------------------------------------------------------------------
     # scripting methods

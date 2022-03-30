@@ -4,7 +4,7 @@ from game.casting.actor import Actor
 from game.casting.point import Point
 
 
-class Ball(Actor):
+class Bullet(Actor):
     """A solid, spherical object that is bounced around in the game."""
     
     def __init__(self, body, image, debug = False):
