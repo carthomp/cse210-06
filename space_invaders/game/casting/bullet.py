@@ -37,7 +37,7 @@ class Bullet(Actor):
 
     def release(self):
         """Release the ball in a random direction."""
-        vx = 1
+        vx = 0
         vy = -BULLET_VELOCITY
         velocity = Point(vx, vy)
         self._body.set_velocity(velocity)
