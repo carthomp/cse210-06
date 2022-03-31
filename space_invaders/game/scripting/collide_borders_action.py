@@ -38,18 +38,23 @@ class CollideBordersAction(Action):
             body.set_position(position)
 
         if y < FIELD_TOP:
-            cast.remove_actor(BULLET_GROUP, bullet)
-            self.remake_bullet(cast)
+            ship_x = ship_position.get_x()
+            position = Point(ship_x, 10000)
+            body.set_position(position)
+            velocity = Point(0,0)
+            body.set_velocity(velocity)
+            bullet.reset_release()
 
         elif y >= (FIELD_BOTTOM - BULLET_WIDTH):
-            stats = cast.get_first_actor(STATS_GROUP)
-            stats.lose_life()
+            # stats = cast.get_first_actor(STATS_GROUP)
+            # stats.lose_life()
 
-            if stats.get_lives() > 0:
-                callback.on_next(TRY_AGAIN)
-            else:
-                callback.on_next(GAME_OVER)
-                self._audio_service.play_sound(over_sound)
+            # if stats.get_lives() > 0:
+            #     callback.on_next(TRY_AGAIN)
+            # else:
+            #     callback.on_next(GAME_OVER)
+            #     self._audio_service.play_sound(over_sound)
+            pass
     
     def remake_bullet(self, cast):
         ship = cast.get_first_actor(SHIP_GROUP)

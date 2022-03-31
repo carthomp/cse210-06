@@ -2,7 +2,7 @@ from constants import *
 from game.casting.sound import Sound
 from game.scripting.action import Action
 
-# We probably do not need this anymore.
+# We need to rewrite this to see if enemies collide, not the ball.
 
 
 class CollideShipAction(Action):

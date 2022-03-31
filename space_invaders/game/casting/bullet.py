@@ -46,6 +46,9 @@ class Bullet(Actor):
     
     def is_released(self):
         return self._released
+
+    def reset_release(self):
+        self._released = False
     
     def swing_left(self):
         """Steers the bat to the left."""

@@ -33,6 +33,9 @@ class CollideEnemyShip(Action):
         bullet = cast.get_first_actor(BULLET_GROUP)
         enemies = cast.get_actors(ENEMY_GROUP)
         stats = cast.get_first_actor(STATS_GROUP)
+        ship = cast.get_first_actor(SHIP_GROUP)
+        ship_body = ship.get_body()
+        ship_position = ship_body.get_position()
 
         for enemy in enemies:
             bullet_body = bullet.get_body()
@@ -43,7 +46,13 @@ class CollideEnemyShip(Action):
                 self._audio_service.play_sound(sound)
                 points = enemy.get_points()
                 stats.add_points(points)
+                ship_x = ship_position.get_x()
+                position = Point(ship_x, 10000)
+                bullet_body.set_position(position)
+                velocity = Point(0,0)
+                bullet_body.set_velocity(velocity)
+                bullet.reset_release()
                 cast.remove_actor(ENEMY_GROUP, enemy)
-                if cast.get_first_actor(BULLET_GROUP):
-                    cast.remove_actor(BULLET_GROUP, bullet)
-                self.remake_bullet(cast)
+                # if cast.get_first_actor(BULLET_GROUP):
+                #     cast.remove_actor(BULLET_GROUP, bullet)
+                # self.remake_bullet(cast)
