@@ -160,8 +160,8 @@ class SceneManager:
 
     def _add_bullet(self, cast):
         cast.clear_actors(BULLET_GROUP)
-        x = CENTER_X - BULLET_WIDTH / 2
-        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
+        x = CENTER_X - BULLET_WIDTH / 2 -10
+        y = SCREEN_HEIGHT - 50  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = Point(0, 0)
@@ -240,8 +240,8 @@ class SceneManager:
 
     def _add_ship(self, cast):
         cast.clear_actors(SHIP_GROUP)
-        x = CENTER_X - SHIP_WIDTH / 2
-        y = SCREEN_HEIGHT - SHIP_HEIGHT
+        x = CENTER_X - SHIP_WIDTH/2
+        y = SCREEN_HEIGHT - 80
         position = Point(x, y)
         size = Point(SHIP_WIDTH, SHIP_HEIGHT)
         velocity = Point(0, 0)
