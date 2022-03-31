@@ -95,7 +95,7 @@ BULLET_GROUP = "balls"
 BULLET_IMAGE = "space_invaders/assets/images/000.png"
 BULLET_WIDTH = 20
 BULLET_HEIGHT = 20
-BULLET_VELOCITY = 20
+BULLET_VELOCITY = 7
 
 # Ship
 SHIP_GROUP = "ships"

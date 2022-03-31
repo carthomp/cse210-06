@@ -19,8 +19,8 @@ class CollideEnemyShip(Action):
         ship = cast.get_first_actor(SHIP_GROUP)
         ship_body = ship.get_body()
         ship_position = ship_body.get_position()
-        x = ship_position.get_x()
-        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
+        x = ship_position.get_x() +15
+        y = SCREEN_HEIGHT -50 
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = ship_body.get_velocity()

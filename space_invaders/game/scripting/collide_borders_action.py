@@ -14,6 +14,13 @@ class CollideBordersAction(Action):
         self._audio_service = audio_service
 
     def execute(self, cast, script, callback):
+        
+        ship = cast.get_first_actor(SHIP_GROUP)
+        ship_body = ship.get_body()
+        ship_position = ship_body.get_position()
+        
+        
+        
         bullet = cast.get_first_actor(BULLET_GROUP)
         body = bullet.get_body()
         position = body.get_position()
@@ -27,7 +34,7 @@ class CollideBordersAction(Action):
             body.set_position(position)
 
         elif x >= (FIELD_RIGHT - BULLET_WIDTH):
-            position = Point(SCREEN_WIDTH - BULLET_WIDTH, position.get_y())
+            position = Point(ship_position.get_x(), SCREEN_HEIGHT - 50  )
             body.set_position(position)
 
         if y < FIELD_TOP:
@@ -48,13 +55,13 @@ class CollideBordersAction(Action):
         ship = cast.get_first_actor(SHIP_GROUP)
         ship_body = ship.get_body()
         ship_position = ship_body.get_position()
-        x = ship_position.get_x() - BULLET_WIDTH / 2 -10
-        y = SCREEN_HEIGHT - 50 
+        x = ship_position.get_x()
+        y = SCREEN_HEIGHT - SHIP_HEIGHT - BULLET_HEIGHT  
         position = Point(x, y)
         size = Point(BULLET_WIDTH, BULLET_HEIGHT)
         velocity = ship_body.get_velocity()
         body = Body(position, size, velocity)
-        body.set_position(position)
+        # body.set_position(position)
         image = Image(BULLET_IMAGE)
         bullet = Bullet(body, image, True)
         cast.add_actor(BULLET_GROUP, bullet)
