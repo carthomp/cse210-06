@@ -109,13 +109,13 @@ SHIP_VELOCITY = 7
 # ENEMY
 ENEMY_GROUP = "bricks"
 ENEMY_IMAGES = {
-    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
-    "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
-    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)],
-    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 29)]
+    "b": [f"space_invaders/assets/images/{i:03}.png" for i in range(20, 21)],
+    "g": [f"space_invaders/assets/images/{i:03}.png" for i in range(22, 23)],
+    "p": [f"space_invaders/assets/images/{i:03}.png" for i in range(24, 25)],
+    "y": [f"space_invaders/assets/images/{i:03}.png" for i in range(26, 27)]
 }
-ENEMY_WIDTH = 80
-ENEMY_HEIGHT = 28
+ENEMY_WIDTH = 64
+ENEMY_HEIGHT = 64
 ENEMY_DELAY = 0.5
 ENEMY_RATE = 4
 ENEMY_POINTS = 50
