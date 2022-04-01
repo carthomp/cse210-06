@@ -125,6 +125,12 @@ class SceneManager:
         self._add_bullet(cast)
         self._add_ship(cast)
         self._add_dialog(cast, PREP_TO_LAUNCH)
+        enemies = cast.get_actors(ENEMY_GROUP)
+        for enemy in enemies:
+            position = enemy.get_starting_position()
+            enemy_body = enemy.get_body()
+            enemy_body.set_position(position)
+            enemy.reset_move_counter()
 
         script.clear_actions(INPUT)
         script.add_action(INPUT, TimedChangeSceneAction(IN_PLAY, 2))
@@ -203,6 +209,7 @@ class SceneManager:
                         animation = Animation(images, ENEMY_RATE, ENEMY_DELAY)
 
                         enemy = Enemy(body, animation, points)
+                        enemy.set_starting_position(position)
                         cast.add_actor(ENEMY_GROUP, enemy)
 
     def _add_dialog(self, cast, message):

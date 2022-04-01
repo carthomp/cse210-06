@@ -19,6 +19,7 @@ class Enemy(Actor):
         self._animation = animation
         self._points = points
         self._move_counter = 0
+        self._starting_position = Point(0,0)
 
     def get_animation(self):
         """Gets the brick's image.
@@ -66,5 +67,14 @@ class Enemy(Actor):
             velocity = Point(0,0)
             body.set_velocity(velocity)
         self._move_counter += 1
-    
 
+    def get_starting_position(self):
+        return self._starting_position
+    
+    def set_starting_position(self,position):
+        """Sets the starting position for the enemy ships."""
+        self._starting_position = position
+    
+    def reset_move_counter(self):
+        self._move_counter = 0
+    
