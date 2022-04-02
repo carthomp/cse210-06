@@ -5,15 +5,16 @@ from game.casting.point import Point
 
 
 class Bullet(Actor):
-    """A solid, spherical object that is bounced around in the game."""
+    """A projectile that is fired by the user's ship in the game."""
 
     def __init__(self, body, image, debug=False):
-        """Constructs a new Ball.
+        """Constructs a new bullet.
 
         Args:
             body: A new instance of Body.
             image: A new instance of Image.
-            debug: If it is being debugged. 
+            debug: If it is being debugged.
+            released: If it has been released/fired by the ship.
         """
         super().__init__(debug)
         self._body = body
@@ -21,7 +22,7 @@ class Bullet(Actor):
         self._released = False
 
     def get_body(self):
-        """Gets the ball's body.
+        """Gets the bullet's body.
 
         Returns:
             An instance of Body.
@@ -29,7 +30,7 @@ class Bullet(Actor):
         return self._body
 
     def get_image(self):
-        """Gets the ball's image.
+        """Gets the bullet's image.
 
         Returns:
             An instance of Image.
@@ -37,7 +38,7 @@ class Bullet(Actor):
         return self._image
 
     def release(self):
-        """Release the ball in a random direction."""
+        """Release the bullet upwards."""
         vx = 0
         vy = -BULLET_VELOCITY
         velocity = Point(vx, vy)

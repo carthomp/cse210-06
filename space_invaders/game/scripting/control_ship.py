@@ -6,7 +6,9 @@ from game.casting.sound import Sound
 
 
 class ControlShip(Action):
-
+    """
+    Moves the ship via keyboard controls.
+    """
     def __init__(self, keyboard_service, audio_service):
         self._keyboard_service = keyboard_service
         self._audio_service = audio_service

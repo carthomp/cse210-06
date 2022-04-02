@@ -3,7 +3,9 @@ from game.scripting.action import Action
 
 
 class DrawDialogAction(Action):
-
+    """
+    Draws the dialog on the screen.
+    """
     def __init__(self, video_service):
         self._video_service = video_service
 

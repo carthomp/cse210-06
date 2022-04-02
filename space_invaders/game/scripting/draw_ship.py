@@ -2,8 +2,9 @@ from constants import *
 from game.scripting.action import Action
 
 # Formerly DrawRacketAction
-
-
+"""
+Draws the ship that the user controls on the screen.
+"""
 class DrawShip(Action):
 
     def __init__(self, video_service):

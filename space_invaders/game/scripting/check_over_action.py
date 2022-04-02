@@ -3,7 +3,7 @@ from game.scripting.action import Action
 
 
 class CheckOverAction(Action):
-
+    """Checks if the level has been cleared to move to the next."""
     def __init__(self):
         pass
 

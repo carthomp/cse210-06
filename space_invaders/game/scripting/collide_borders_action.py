@@ -5,7 +5,10 @@ from game.casting.point import Point
 
 
 class CollideBordersAction(Action):
-
+    """
+    Checks if the bullet has collided with the border to bring it back inbounds.
+    Also moves the bullet off screen if it goes out the top border.
+    """
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
         self._audio_service = audio_service

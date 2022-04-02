@@ -10,24 +10,12 @@ from game.casting.bullet import Bullet
 
 
 class CollideEnemyShip(Action):
-
+    """
+    Removes an enemy if the bullet hits it. Also moves the bullet out of sight.
+    """
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
         self._audio_service = audio_service
-
-    def remake_bullet(self, cast):
-        ship = cast.get_first_actor(SHIP_GROUP)
-        ship_body = ship.get_body()
-        ship_position = ship_body.get_position()
-        x = ship_position.get_x() +15
-        y = SCREEN_HEIGHT -50 
-        position = Point(x, y)
-        size = Point(BULLET_WIDTH, BULLET_HEIGHT)
-        velocity = ship_body.get_velocity()
-        body = Body(position, size, velocity)
-        image = Image(BULLET_IMAGE)
-        bullet = Bullet(body, image, True)
-        cast.add_actor(BULLET_GROUP, bullet)
 
     def execute(self, cast, script, callback):
         bullet = cast.get_first_actor(BULLET_GROUP)
@@ -53,6 +41,3 @@ class CollideEnemyShip(Action):
                 bullet_body.set_velocity(velocity)
                 bullet.reset_release()
                 cast.remove_actor(ENEMY_GROUP, enemy)
-                # if cast.get_first_actor(BULLET_GROUP):
-                #     cast.remove_actor(BULLET_GROUP, bullet)
-                # self.remake_bullet(cast)

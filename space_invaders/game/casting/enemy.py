@@ -4,15 +4,17 @@ from constants import ENEMY_HEIGHT, ENEMY_WIDTH
 
 
 class Enemy(Actor):
-    """A solid, rectangular object that can be broken."""
+    """A hostile entity that moves in a set pattern towards the bottom of the screen and has a deadly touch."""
 
     def __init__(self, body, animation, points, debug=False):
-        """Constructs a new Brick.
+        """Constructs a new enemy.
 
         Args:
             body: A new instance of Body.
             image: A new instance of Image.
             debug: If it is being debugged. 
+            move_counter: Int used to track the timing of the enemy movements.
+            starting_position: Start position used to return the enemies to their start if a life is lost.
         """
         super().__init__(debug)
         self._body = body
@@ -22,7 +24,7 @@ class Enemy(Actor):
         self._starting_position = Point(0,0)
 
     def get_animation(self):
-        """Gets the brick's image.
+        """Gets the enemy's image.
 
         Returns:
             An instance of Image.
@@ -30,7 +32,7 @@ class Enemy(Actor):
         return self._animation
 
     def get_body(self):
-        """Gets the brick's body.
+        """Gets the enemy's body.
 
         Returns:
             An instance of Body.
@@ -38,10 +40,10 @@ class Enemy(Actor):
         return self._body
 
     def get_points(self):
-        """Gets the brick's points.
+        """Gets the enemy's points.
 
         Returns:
-            A number representing the brick's points.
+            A number representing the enemy's points.
         """
         return self._points
     

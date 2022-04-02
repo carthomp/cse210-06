@@ -6,7 +6,9 @@ from game.casting.stats import Stats
 # We need to rewrite this to see if enemies collide, not the ball.
 
 class CollideShipAction(Action):
-
+    """
+    Checks if the ship has been touched by an enemy. If so, takes a life away.
+    """
     def __init__(self, physics_service, audio_service):
         self._physics_service = physics_service
         self._audio_service = audio_service

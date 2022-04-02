@@ -5,7 +5,9 @@ from game.scripting.action import Action
 
 
 class DrawEnemyShip(Action):
-
+    """
+    Draws enemies to the screen.
+    """
     def __init__(self, video_service):
         self._video_service = video_service
 

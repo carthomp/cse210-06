@@ -3,7 +3,7 @@ from game.scripting.action import Action
 
 
 class DrawHudAction(Action):
-
+    """Draws the heads up display to the screen."""
     def __init__(self, video_service):
         self._video_service = video_service
 

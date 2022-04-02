@@ -3,7 +3,9 @@ from game.scripting.action import Action
 
 
 class ChangeSceneAction(Action):
-
+    """
+    Makes a callback to change the scene.
+    """
     def __init__(self, keyboard_service, next_scene):
         self._keyboard_service = keyboard_service
         self._next_scene = next_scene
