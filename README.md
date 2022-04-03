@@ -49,3 +49,5 @@ root                    (project root folder)
 
 - Carter Thompson - carthomp88@byu.edu
 - Alvaro Condori - con21033@byui.edu
+- Mario Meza - leo.meza.mancilla@gmail.com
+- Lame Diteko - dit21002@byui.edu
